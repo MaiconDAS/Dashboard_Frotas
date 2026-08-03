@@ -1,0 +1,20 @@
+============================================================
+  DASHBOARD FROTAS - MADEMAXI
+============================================================
+
+Empresa: MADEMAXI - Materiais de Construcao e Ferragem
+Todos os direitos reservados (C) 2026
+
+Desenvolvido por:
+  Maicon do Amarilho Silveira
+  GitHub: https://github.com/MaiconDAS
+
+Este software e propriedade exclusiva da MADEMAXI.
+Qualquer reproducao, distribuicao ou modificacao sem
+autorizacao expressa e estritamente proibida.
+
+Para suporte tecnico, entre em contato com o desenvolvedor
+atraves do GitHub ou e-mail institucional.
+
+Obrigado por utilizar o Dashboard Frotas!
+============================================================

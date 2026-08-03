@@ -1,0 +1,16 @@
+﻿LICENCA DE USO COMERCIAL - DASHBOARD FROTA
+
+Copyright (c) 2026 Maicon do Amarilho Silveira. Todos os direitos reservados.
+
+Este software e seu codigo-fonte, design, logotipos, documentacao e todos os materiais relacionados sao propriedade exclusiva de Maicon do Amarilho Silveira.
+
+Termos:
+1. E proibida a copia, distribuicao, modificacao, engenharia reversa ou qualquer forma de reproducao deste software sem autorizacao expressa e por escrito de Maicon do Amarilho Silveira.
+2. A licenca de uso e intransferivel e valida apenas para o licenciado contratante.
+3. Maicon do Amarilho Silveira reserva-se o direito de atualizar, modificar ou descontinuar este software a qualquer momento.
+4. Qualquer violacao destes termos acarretara acoes legais civis e criminais conforme a legislacao brasileira (Lei n 9.609/1998 e Lei n 9.610/1998).
+
+Para licenciamento comercial, contato: [inserir e-mail ou telefone]
+
+Maicon do Amarilho Silveira
+2026

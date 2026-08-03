@@ -1,0 +1,45 @@
+# Dados sensiveis e temporarios
+data/app.db
+data/config.json
+data/logs/
+*.db
+*.log
+
+# Ambiente virtual
+.venv/
+venv/
+env/
+ENV/
+
+# Builds e distribuicao
+dist/
+build/
+dist_installer/
+*.spec
+*.exe
+*.msi
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Outros
+*.tmp
+*.bak

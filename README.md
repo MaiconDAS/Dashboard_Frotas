@@ -1,149 +1,167 @@
-﻿# \# ðŸš› Dashboard Frotas â€” MADEMAXI
+# 🚛 Dashboard Frotas — MADEMAXI
 
-# 
+<p align="center">
+  <img src="app/assets/logo_mademaxi.png" alt="MADEMAXI Logo" width="180">
+</p>
 
-# \<p align="center"\>
+<p align="center">
+  <b>Sistema de Gestão de Atividades de Veículos</b><br>
+  <i>MADEMAXI — Materiais de Construção e Ferragem</i>
+</p>
 
-# &#x20; \<img src="app/assets/logo\_mademaxi.png" alt="MADEMAXI Logo" width="180"\>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/PySide6-6.10+-green?logo=qt&logoColor=white">
+  <img src="https://img.shields.io/badge/SQLite-3-lightgrey?logo=sqlite&logoColor=white">
+  <img src="https://img.shields.io/badge/License-Proprietary-red">
+</p>
 
-# \</p\>
+---
 
-# 
+## 📋 Sobre
 
-# \<p align="center"\>
+O **Dashboard Frotas** é um aplicativo desktop desenvolvido para a **MADEMAXI** com o objetivo de centralizar o controle de atividades realizadas pela frota de veículos da empresa.
 
-# &#x20; \<b\>Sistema de Gestao de Atividades de Veiculos\</b\>\<br\>
+O sistema permite o cadastro completo de veículos, registro ágil de atividades (quantidade de serviços realizados), acompanhamento em tempo real via dashboard com KPIs e gráficos, geração de relatórios PDF profissionais e envio automatizado por e-mail com agendamento semanal.
 
-# &#x20; \<i\>MADEMAXI â€” Materiais de Construcao e Ferragem\</i\>
+> ⚠️ Este software é propriedade exclusiva da **MADEMAXI**. Todos os direitos reservados © 2026.
 
-# \</p\>
+---
 
-# 
+## ✨ Funcionalidades
 
-# \<p align="center"\>
+| Módulo | Descrição | Status |
+|--------|-----------|--------|
+| 🚗 **Cadastro de Veículos** | CRUD completo com placa, modelo, marca, ano, categoria e status | ✅ |
+| 📝 **Registro de Atividades** | Vinculação rápida de atividades a veículos com data e quantidade | ✅ |
+| 📊 **Dashboard** | KPIs em tempo real, gráficos de barras (top veículos) e linha (atividades por dia) | ✅ |
+| 📜 **Histórico** | Tabela paginada com filtros por veículo, período, categoria e ordenação | ✅ |
+| 📄 **Relatórios PDF** | Geração de PDFs profissionais com identidade visual MADEMAXI | ✅ |
+| 📧 **E-mail SMTP** | Envio manual ou automático de relatórios com corpo HTML responsivo | ✅ |
+| ⏰ **Agendamento** | Envio semanal automático às segundas-feiras às 08:00 com catch-up | ✅ |
+| 🎨 **Temas** | Suporte a tema Dark (padrão) e Light com paleta global | ✅ |
 
-# &#x20; \<img src="https://img.shields.io/badge/Python-3.14-blue?logo=python\&logoColor=white"\>
+---
 
-# &#x20; \<img src="https://img.shields.io/badge/PySide6-6.10+-green?logo=qt\&logoColor=white"\>
+## 🛠 Stack Técnica
 
-# &#x20; \<img src="https://img.shields.io/badge/SQLite-3-lightgrey?logo=sqlite\&logoColor=white"\>
+- **Python** 3.14.6 — Linguagem principal
+- **PySide6** >= 6.10.1 — Framework GUI (Qt6)
+- **SQLite + SQLAlchemy** >= 2.0.40 — Banco de dados local
+- **PyQtGraph** >= 0.14.0 — Gráficos interativos
+- **ReportLab** >= 4.3.1 — Geração de PDFs
+- **APScheduler** >= 3.11.0 — Agendamento de tarefas
+- **PyInstaller** — Compilação para executável standalone
+- **Inno Setup** — Gerador de instalador Windows
 
-# &#x20; \<img src="https://img.shields.io/badge/License-Proprietary-red"\>
+---
 
-# \</p\>
+## 🚀 Instalação para Desenvolvimento
 
-# 
+```bash
+# Clone o repositório
+git clone https://github.com/MaiconDAS/Dashboard_Frotas.git
+cd Dashboard_Frotas
 
-# \---
+# Crie e ative o ambiente virtual
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 
-# 
+# Instale as dependências
+pip install -r requirements.txt
 
-# \## ðŸ“‹ Sobre
+# Execute o aplicativo
+python run.py
+```
 
-# 
+---
 
-# O \*\*Dashboard Frotas\*\* e um aplicativo desktop desenvolvido para a \*\*MADEMAXI\*\* com o objetivo de centralizar o controle de atividades realizadas pela frota de veiculos da empresa.
+## 📦 Instalação para Usuário Final
 
-# 
+Baixe o instalador mais recente na seção **Releases** e execute o arquivo `Dashboard_Frotas_MADEMAXI_Setup_vX.X.X.exe`.
 
-# O sistema permite o cadastro completo de veiculos, registro agil de atividades (quantidade de servicos realizados), acompanhamento em tempo real via dashboard com KPIs e graficos, geracao de relatorios PDF profissionais e envio automatizado por e-mail com agendamento semanal.
+O instalador irá:
 
-# 
+- Verificar se existe uma versão anterior instalada e oferecer remoção
+- Instalar o software em `C:\Program Files\Dashboard_Frotas`
+- Criar atalhos no Menu Iniciar e Área de Trabalho
+- Inicializar o banco de dados e configurações limpas
 
-# \> âš ï¸ Este software e propriedade exclusiva da \*\*MADEMAXI\*\*. Todos os direitos reservados (C) 2026.
+---
 
-# 
+## 📁 Estrutura do Projeto
 
-# \---
+```
+Dashboard_Frotas/
+├── app/
+│   ├── assets/              # Logo e recursos visuais
+│   ├── core/                # Config, database, logging, utils
+│   ├── models/              # ORM (Veiculo, Atividade, Configuracao)
+│   ├── services/            # Regras de negócio (CRUD, PDF, E-mail, Agendador)
+│   └── ui/                  # Interface gráfica (páginas, dialogs, models)
+├── data/                    # Banco SQLite e configurações (gerado em runtime)
+├── dist/                    # Executável compilado (PyInstaller)
+├── dist_installer/          # Instalador final (Inno Setup)
+├── build_installer.py       # Script de build automatizado
+├── Dashboard_Frotas.iss     # Script do Inno Setup
+├── credits.txt              # Créditos e direitos autorais
+├── requirements.txt         # Dependências Python
+├── run.py                   # Ponto de entrada da aplicação
+└── README.md                # Este arquivo
+```
 
-# 
+---
 
-# \## âœ¨ Funcionalidades
+## 🖼 Screenshots
 
-# 
+<p align="center">
+  <i>Dashboard com KPIs e gráficos em tempo real</i>
+</p>
 
-# | Modulo | Descricao | Status |
+<p align="center">
+  <i>Relatório PDF profissional com identidade MADEMAXI</i>
+</p>
 
-# |--------|-----------|--------|
+---
 
-# | ðŸš— \*\*Cadastro de Veiculos\*\* | CRUD completo com placa, modelo, marca, ano, categoria e status | âœ… |
+## ⚙️ Configurações
 
-# | ðŸ“ \*\*Registro de Atividades\*\* | Vinculacao rapida de atividades a veiculos com data e quantidade | âœ… |
+Acesse a aba **Configurações** no software para ajustar:
 
-# | ðŸ“Š \*\*Dashboard\*\* | KPIs em tempo real, graficos de barras (top veiculos) e linha (atividades por dia) | âœ… |
+- **SMTP** — Servidor, porta, remetente e destinatário de e-mail
+- **Tema** — Alternar entre Dark e Light
+- **Empresa** — Nome e logo personalizado para relatórios
+- **Agendamento** — Ativar/desativar envio semanal automático
 
-# | ðŸ“œ \*\*Historico\*\* | Tabela paginada com filtros por veiculo, periodo, categoria e ordenacao | âœ… |
+---
 
-# | ðŸ“„ \*\*Relatorios PDF\*\* | Geracao de PDFs profissionais com identidade visual MADEMAXI | âœ… |
+## 🧑‍💻 Desenvolvedor
 
-# | ðŸ“§ \*\*E-mail SMTP\*\* | Envio manual ou automatico de relatorios com corpo HTML responsivo | âœ… |
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/MaiconDAS">
+        <img src="https://github.com/MaiconDAS.png?size=100" width="100" style="border-radius: 50%"><br>
+        <sub><b>Maicon do Amarilho Silveira</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
-# | â° \*\*Agendamento\*\* | Envio semanal automatico as segundas-feiras as 08:00 com catch-up | âœ… |
+🔗 **GitHub:** [github.com/MaiconDAS](https://github.com/MaiconDAS)
 
-# | ðŸŽ¨ \*\*Temas\*\* | Suporte a tema Dark (padrao) e Light com paleta global | âœ… |
+---
 
-# 
+## 📝 Licença
 
-# \---
+Este software é propriedade exclusiva da **MADEMAXI — Materiais de Construção e Ferragem**.
 
-# 
+Todos os direitos reservados © 2026 MADEMAXI.
 
-# \## ðŸ›  Stack Tecnica
+É estritamente proibida a reprodução, distribuição ou modificação deste software sem autorização expressa por escrita da MADEMAXI.
 
-# 
+Para suporte técnico, entre em contato com o desenvolvedor através do GitHub.
 
-# \- \*\*Python\*\* 3.14.6 â€” Linguagem principal
-
-# \- \*\*PySide6\*\* \>= 6.10.1 â€” Framework GUI (Qt6)
-
-# \- \*\*SQLite + SQLAlchemy\*\* \>= 2.0.40 â€” Banco de dados local
-
-# \- \*\*PyQtGraph\*\* \>= 0.14.0 â€” Graficos interativos
-
-# \- \*\*ReportLab\*\* \>= 4.3.1 â€” Geracao de PDFs
-
-# \- \*\*APScheduler\*\* \>= 3.11.0 â€” Agendamento de tarefas
-
-# \- \*\*PyInstaller\*\* â€” Compilacao para executavel standalone
-
-# \- \*\*Inno Setup\*\* â€” Gerador de instalador Windows
-
-# 
-
-# \---
-
-# 
-
-# \## ðŸš€ Instalacao para Desenvolvimento
-
-# 
-
-# ```bash
-
-# \# Clone o repositorio
-
-# git clone https://github.com/MaiconDAS/Dashboard\_Frotas.git
-
-# cd Dashboard\_Frotas
-
-# 
-
-# \# Crie e ative o ambiente virtual
-
-# python -m venv .venv
-
-# .venv\\Scripts\\Activate.ps1
-
-# 
-
-# \# Instale as dependencias
-
-# pip install -r requirements.txt
-
-# 
-
-# \# Execute o aplicativo
-
-# python run.py
-
-
+<p align="center">
+  <sub>Feito com ❤️ para a <strong>MADEMAXI</strong></sub>
+</p>

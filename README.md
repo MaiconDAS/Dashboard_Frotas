@@ -1,36 +1,36 @@
-# \# 🚛 Dashboard Frotas — MADEMAXI
+﻿# \# ðŸš› Dashboard Frotas â€” MADEMAXI
 
 # 
 
-# \&lt;p align="center"\&gt;
+# \<p align="center"\>
 
-# &#x20; \&lt;img src="app/assets/logo\_mademaxi.png" alt="MADEMAXI Logo" width="180"\&gt;
+# &#x20; \<img src="app/assets/logo\_mademaxi.png" alt="MADEMAXI Logo" width="180"\>
 
-# \&lt;/p\&gt;
-
-# 
-
-# \&lt;p align="center"\&gt;
-
-# &#x20; \&lt;b\&gt;Sistema de Gestao de Atividades de Veiculos\&lt;/b\&gt;\&lt;br\&gt;
-
-# &#x20; \&lt;i\&gt;MADEMAXI — Materiais de Construcao e Ferragem\&lt;/i\&gt;
-
-# \&lt;/p\&gt;
+# \</p\>
 
 # 
 
-# \&lt;p align="center"\&gt;
+# \<p align="center"\>
 
-# &#x20; \&lt;img src="https://img.shields.io/badge/Python-3.14-blue?logo=python\&logoColor=white"\&gt;
+# &#x20; \<b\>Sistema de Gestao de Atividades de Veiculos\</b\>\<br\>
 
-# &#x20; \&lt;img src="https://img.shields.io/badge/PySide6-6.10+-green?logo=qt\&logoColor=white"\&gt;
+# &#x20; \<i\>MADEMAXI â€” Materiais de Construcao e Ferragem\</i\>
 
-# &#x20; \&lt;img src="https://img.shields.io/badge/SQLite-3-lightgrey?logo=sqlite\&logoColor=white"\&gt;
+# \</p\>
 
-# &#x20; \&lt;img src="https://img.shields.io/badge/License-Proprietary-red"\&gt;
+# 
 
-# \&lt;/p\&gt;
+# \<p align="center"\>
+
+# &#x20; \<img src="https://img.shields.io/badge/Python-3.14-blue?logo=python\&logoColor=white"\>
+
+# &#x20; \<img src="https://img.shields.io/badge/PySide6-6.10+-green?logo=qt\&logoColor=white"\>
+
+# &#x20; \<img src="https://img.shields.io/badge/SQLite-3-lightgrey?logo=sqlite\&logoColor=white"\>
+
+# &#x20; \<img src="https://img.shields.io/badge/License-Proprietary-red"\>
+
+# \</p\>
 
 # 
 
@@ -38,7 +38,7 @@
 
 # 
 
-# \## 📋 Sobre
+# \## ðŸ“‹ Sobre
 
 # 
 
@@ -50,7 +50,7 @@
 
 # 
 
-# \&gt; ⚠️ Este software e propriedade exclusiva da \*\*MADEMAXI\*\*. Todos os direitos reservados (C) 2026.
+# \> âš ï¸ Este software e propriedade exclusiva da \*\*MADEMAXI\*\*. Todos os direitos reservados (C) 2026.
 
 # 
 
@@ -58,7 +58,7 @@
 
 # 
 
-# \## ✨ Funcionalidades
+# \## âœ¨ Funcionalidades
 
 # 
 
@@ -66,47 +66,21 @@
 
 # |--------|-----------|--------|
 
-# | 🚗 \*\*Cadastro de Veiculos\*\* | CRUD completo com placa, modelo, marca, ano, categoria e status | ✅ |
+# | ðŸš— \*\*Cadastro de Veiculos\*\* | CRUD completo com placa, modelo, marca, ano, categoria e status | âœ… |
 
-# | 📝 \*\*Registro de Atividades\*\* | Vinculacao rapida de atividades a veiculos com data e quantidade | ✅ |
+# | ðŸ“ \*\*Registro de Atividades\*\* | Vinculacao rapida de atividades a veiculos com data e quantidade | âœ… |
 
-# | 📊 \*\*Dashboard\*\* | KPIs em tempo real, graficos de barras (top veiculos) e linha (atividades por dia) | ✅ |
+# | ðŸ“Š \*\*Dashboard\*\* | KPIs em tempo real, graficos de barras (top veiculos) e linha (atividades por dia) | âœ… |
 
-# | 📜 \*\*Historico\*\* | Tabela paginada com filtros por veiculo, periodo, categoria e ordenacao | ✅ |
+# | ðŸ“œ \*\*Historico\*\* | Tabela paginada com filtros por veiculo, periodo, categoria e ordenacao | âœ… |
 
-# | 📄 \*\*Relatorios PDF\*\* | Geracao de PDFs profissionais com identidade visual MADEMAXI | ✅ |
+# | ðŸ“„ \*\*Relatorios PDF\*\* | Geracao de PDFs profissionais com identidade visual MADEMAXI | âœ… |
 
-# | 📧 \*\*E-mail SMTP\*\* | Envio manual ou automatico de relatorios com corpo HTML responsivo | ✅ |
+# | ðŸ“§ \*\*E-mail SMTP\*\* | Envio manual ou automatico de relatorios com corpo HTML responsivo | âœ… |
 
-# | ⏰ \*\*Agendamento\*\* | Envio semanal automatico as segundas-feiras as 08:00 com catch-up | ✅ |
+# | â° \*\*Agendamento\*\* | Envio semanal automatico as segundas-feiras as 08:00 com catch-up | âœ… |
 
-# | 🎨 \*\*Temas\*\* | Suporte a tema Dark (padrao) e Light com paleta global | ✅ |
-
-# 
-
-# \---
-
-# 
-
-# \## 🛠 Stack Tecnica
-
-# 
-
-# \- \*\*Python\*\* 3.14.6 — Linguagem principal
-
-# \- \*\*PySide6\*\* \&gt;= 6.10.1 — Framework GUI (Qt6)
-
-# \- \*\*SQLite + SQLAlchemy\*\* \&gt;= 2.0.40 — Banco de dados local
-
-# \- \*\*PyQtGraph\*\* \&gt;= 0.14.0 — Graficos interativos
-
-# \- \*\*ReportLab\*\* \&gt;= 4.3.1 — Geracao de PDFs
-
-# \- \*\*APScheduler\*\* \&gt;= 3.11.0 — Agendamento de tarefas
-
-# \- \*\*PyInstaller\*\* — Compilacao para executavel standalone
-
-# \- \*\*Inno Setup\*\* — Gerador de instalador Windows
+# | ðŸŽ¨ \*\*Temas\*\* | Suporte a tema Dark (padrao) e Light com paleta global | âœ… |
 
 # 
 
@@ -114,7 +88,33 @@
 
 # 
 
-# \## 🚀 Instalacao para Desenvolvimento
+# \## ðŸ›  Stack Tecnica
+
+# 
+
+# \- \*\*Python\*\* 3.14.6 â€” Linguagem principal
+
+# \- \*\*PySide6\*\* \>= 6.10.1 â€” Framework GUI (Qt6)
+
+# \- \*\*SQLite + SQLAlchemy\*\* \>= 2.0.40 â€” Banco de dados local
+
+# \- \*\*PyQtGraph\*\* \>= 0.14.0 â€” Graficos interativos
+
+# \- \*\*ReportLab\*\* \>= 4.3.1 â€” Geracao de PDFs
+
+# \- \*\*APScheduler\*\* \>= 3.11.0 â€” Agendamento de tarefas
+
+# \- \*\*PyInstaller\*\* â€” Compilacao para executavel standalone
+
+# \- \*\*Inno Setup\*\* â€” Gerador de instalador Windows
+
+# 
+
+# \---
+
+# 
+
+# \## ðŸš€ Instalacao para Desenvolvimento
 
 # 
 
@@ -145,4 +145,5 @@
 # \# Execute o aplicativo
 
 # python run.py
+
 

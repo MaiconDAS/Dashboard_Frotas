@@ -1,0 +1,432 @@
+BACKUP PROJETO - Dashboard de Controle de Atividades de Veiculos
+Atualizado: 2026-08-06
+Caminho: C:\Dashboard_Frota_Dev
+
+================================================================================
+INSTRUCAO OBRIGATORIA PARA A PROXIMA IA
+================================================================================
+
+ANTES DE QUALQUER ALTERACAO, EXECUTE OS COMANDOS POWERSHELL ABAIXO PARA LER
+O CONTEUDO ATUAL DE CADA ARQUIVO. NUNCA ALTERE ARQUIVOS SEM ANTES LER O QUE
+JA EXISTE NO DISCO. O USUARIO PROIBIU ALTERACOES SEM ANALISE PREVIA.
+
+Execute no PowerShell:
+
+--- LOTE 1: MODELS ---
+Get-Content "C:\Dashboard_Frota_Dev\app\models\base.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\models\vehicle.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\models\activity.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\models\admin.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\models\audit_log.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\models\setting.py" -Raw
+
+--- LOTE 2: CORE ---
+Get-Content "C:\Dashboard_Frota_Dev\app\core\database.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\core\config_store.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\core\paths.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\core\logging_config.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\core\utils.py" -Raw
+
+--- LOTE 3: SERVICES ---
+Get-Content "C:\Dashboard_Frota_Dev\app\services\vehicle_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\activity_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\admin_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\audit_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\category_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\report_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\email_service.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\services\scheduler_service.py" -Raw
+
+--- LOTE 4: UI PAGES ---
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\pages\dashboard_page.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\pages\vehicles_page.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\pages\activity_register_page.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\pages\history_page.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\pages\admin_management_page.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\pages\settings_page.py" -Raw
+
+--- LOTE 5: UI DIALOGS ---
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\dialogs\login_dialog.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\dialogs\admin_register_dialog.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\dialogs\admin_edit_dialog.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\dialogs\vehicle_dialog.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\dialogs\activity_dialog.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\dialogs\audit_dialog.py" -Raw
+
+--- LOTE 6: UI MODELS E OUTROS ---
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\models\vehicle_table_model.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\models\activity_table_model.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\models\admin_table_model.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\theme.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\icons.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\app\ui\main_window.py" -Raw
+
+--- LOTE 7: RAIZ DO PROJETO ---
+Get-Content "C:\Dashboard_Frota_Dev\run.py" -Raw
+Get-Content "C:\Dashboard_Frota_Dev\requirements.txt" -Raw
+
+================================================================================
+VISAO GERAL
+================================================================================
+
+EMPRESA: MADEMAXI - Materiais de Construcao e Ferragem
+Logo: app/assets/logo_mademaxi.png (vermelho #E53935 + preto #1a1a1a)
+
+OBJETIVO: Aplicacao desktop para cadastro de veiculos, registro de atividades
+(quantidade), dashboard com KPIs e graficos, historico filtravel com
+paginacao, geracao de relatorio PDF e envio por e-mail (inclui agendamento
+semanal as segundas 08:00).
+
+================================================================================
+STACK TECNICA
+================================================================================
+
+Python 3.14.6, PySide6 >= 6.10.1, SQLite + SQLAlchemy >= 2.0.40,
+PyQtGraph >= 0.14.0, ReportLab >= 4.3.1, smtplib, APScheduler >= 3.11.0,
+PyInstaller, Inno Setup 7.
+
+Tema dark padrao. Tema light com fundo cinza claro (#f3f4f6) e texto escuro.
+Highlight da sidebar: vermelho MADEMAXI (#E53935).
+
+================================================================================
+ESTRUTURA DE PASTAS
+================================================================================
+
+Dashboard_Frota_Dev/
+  run.py
+  requirements.txt
+  README.md
+  backup_projeto.md
+  build_installer.py
+  Dashboard_Frotas.iss
+  credits.txt
+  migrate_categories.py
+  data/app.db (SQLite - NAO INCLUIR NO INSTALADOR)
+  data/config.json (NAO INCLUIR NO INSTALADOR)
+  data/logs/app.log (NAO INCLUIR NO INSTALADOR)
+  app/main.py
+  app/assets/logo_mademaxi.png
+  app/core/config_store.py
+  app/core/database.py
+  app/core/logging_config.py
+  app/core/paths.py
+  app/core/utils.py
+  app/models/base.py
+  app/models/vehicle.py
+  app/models/activity.py
+  app/models/admin.py
+  app/models/audit_log.py
+  app/models/setting.py
+  app/services/vehicle_service.py
+  app/services/activity_service.py
+  app/services/admin_service.py
+  app/services/audit_service.py
+  app/services/category_service.py
+  app/services/report_service.py
+  app/services/email_service.py
+  app/services/scheduler_service.py
+  app/ui/theme.py
+  app/ui/icons.py
+  app/ui/main_window.py
+  app/ui/dialogs/login_dialog.py
+  app/ui/dialogs/admin_register_dialog.py
+  app/ui/dialogs/admin_edit_dialog.py
+  app/ui/dialogs/master_password_setup_dialog.py
+  app/ui/dialogs/vehicle_dialog.py
+  app/ui/dialogs/activity_dialog.py
+  app/ui/dialogs/audit_dialog.py
+  app/ui/models/vehicle_table_model.py
+  app/ui/models/activity_table_model.py
+  app/ui/models/admin_table_model.py
+  app/ui/pages/dashboard_page.py
+  app/ui/pages/vehicles_page.py
+  app/ui/pages/activity_register_page.py
+  app/ui/pages/history_page.py
+  app/ui/pages/admin_management_page.py
+  app/ui/pages/settings_page.py
+
+================================================================================
+CHANGELOG v2.0.0 - LOGIN ADMINISTRATIVO + CATEGORIAS CUSTOMIZAVEIS
+================================================================================
+
+[LOGIN ADMINISTRATIVO]
+- Tela de login (LoginDialog) com logo MADEMAXI
+- Autenticacao via AdminService.authenticate() com PBKDF2
+- Atalho F1 abre cadastro de administrador via senha mestra
+- AdminRegisterDialog: cadastro com nome_completo, username, senha, is_master
+- AdminEditDialog: edicao completa + checkbox is_master + botao excluir
+- AdminManagementPage: tabela de admins + secao categorias
+- Soft delete: is_active=False ao excluir
+- MainWindow recebe admin_data e exibe aba "Gestao" apenas se is_master=True
+- Titulo da janela: "Dashboard Frotas — MADEMAXI | Logado: {nome_completo}"
+
+[REVAMP VISUAL]
+- Padrao de espacamento: margins 20,16,20,16 (pages), 16px entre campos,
+  28px antes de botoes, botoes height 44, padding 0 28px
+- Sidebar: highlight #E53935, hover #1f1f1f, itens border-radius 8px
+- VehicleDialog: Placa, Categoria, Status, Observacoes (modelo editavel)
+- ActivityRegisterPage: layout vertical espacoso, labels acima dos inputs
+- HistoryPage: filtros em QGridLayout com colunas proporcionais
+
+[CATEGORIAS CUSTOMIZAVEIS]
+- CategoryService: persistencia via tabela Setting (chave="vehicle_categories")
+- AdminManagementPage: QListWidget + botoes Adicionar/Editar/Excluir
+- VehicleDialog, DashboardPage, HistoryPage: categorias dinamicas
+- Migration: removido CHECK constraint ck_veiculos_categoria
+
+================================================================================
+CHANGELOG v1.1.0 - SISTEMA DE LOGIN E CADASTRO ADMINISTRATIVO
+================================================================================
+
+[LOGIN ADMINISTRATIVO]
+- Tela de login (LoginDialog) exibida ao abrir o software com logo MADEMAXI.
+- Autenticacao via AdminService.authenticate() usando PBKDF2 com salt.
+- Senha mestra oculta: atalho F1 na tela de login abre prompt de senha mestra.
+- Senha mestra validada via AdminService.validate_master_password().
+- Senha mestra correta abre AdminRegisterDialog para cadastro de administradores.
+- Sem senha mestra configurada, o primeiro acesso permite cadastro livre.
+
+[TIPOS DE CONTA]
+- Administrador (is_master=True): acesso total. Pode gerenciar usuarios,
+  categorias de veiculos, alterar senha mestra e visualizar auditoria.
+- Funcionario (is_master=False): acesso limitado. Pode registrar atividades,
+  consultar historico, dashboard e gerar relatorios. Nao acessa a aba Gestao.
+- Aba "Gestao" (admin_management_page) so aparece na sidebar se is_master=True.
+- Titulo da janela exibe: "Dashboard Frotas — MADEMAXI | Logado: {nome_completo}".
+
+[CADASTRO DE USUARIO]
+- AdminRegisterDialog: campos nome_completo, username, senha (min 6 chars),
+  checkbox "Administrador" (is_master).
+- AdminEditDialog: edicao completa com nome_completo, username, nova senha
+  (campo opcional), checkbox is_master, botao "Excluir Cadastro" vermelho.
+- Botao "Alterar Cadastro" na AdminManagementPage abre o dialog de edicao.
+- Impedimento de auto-exclusao/inativacao: mensagem "Nao e possivel excluir
+  o perfil em uso" se o admin tentar excluir a propria conta.
+- Soft delete: exclusao define is_active=False (nao remove do banco).
+- Hard delete disponivel via AdminService.hard_delete_admin().
+
+[SENHA MESTRA]
+- Armazenada na tabela Setting com chave "master_password_hash".
+- Hash gerado com PBKDF2 (sha256, 100000 iteracoes, salt de 16 bytes).
+- Formato armazenado: "hash_hex:salt_hex".
+- Alteracao via botao "Alterar Senha Mestra" na aba Gestao.
+- Confirmacao com dupla digitacao da nova senha.
+
+[MODELO DE DADOS]
+- Admin model: id, username (unique), password_hash, nome_completo,
+  is_master (bool), is_active (bool), created_at.
+- database.py: importa app.models.admin no init_db() para criacao da tabela.
+- AdminService: CRUD completo, autenticacao, validacao de senha mestra,
+  hash/verify com secrets.compare_digest.
+
+[REVAMP VISUAL DO LOGIN]
+- Logo MADEMAXI reposicionado com scaled(220, 170, KeepAspectRatio).
+- Texto "MADEMAXI" removido do login (ja presente no logo).
+- Subtitulo "Dashboard de Controle de Frotas" abaixo do logo.
+- Layout espacoso: dialog 420x520, logo container FixedHeight(200).
+- Sem hint de cadastro visivel na tela (F1 e oculto).
+
+[SEGURANCA]
+- Nunca exibe senha antiga. Somente permite definir nova senha.
+- Senhas armazenadas com hash + salt, nunca em texto plano.
+- Comparacao de hash via secrets.compare_digest (timing-safe).
+
+================================================================================
+CHANGELOG v2.1.0 - SISTEMA DE AUDITORIA DE ATIVIDADES
+================================================================================
+
+[NOVO] Sistema de Auditoria
+- Modelo AuditLog (app/models/audit_log.py): tabela auditoria com id, usuario,
+  acao, entidade, entidade_id, descricao, data_hora, data_retroativa
+- AuditService (app/services/audit_service.py): metodos log() e list_all()
+- AuditDialog (app/ui/dialogs/audit_dialog.py): tabela QTableWidget com logs
+- Botao "Auditoria" na AdminManagementPage (aba Gestao), visivel so para master
+- ActivityService.create/update/delete: parametro opcional username, registra
+  log automaticamente com placa e nome do veiculo
+- ActivityRegisterPage e HistoryPage passam username para o service
+- MainWindow passa admin_data para ActivityRegisterPage e HistoryPage
+- database.py: importa audit_log no init_db()
+- Correcao database is locked: chamadas AuditService.log() movidas para FORA
+  dos blocos with session_scope em ActivityService
+
+[DETALHAMENTO DA AUDITORIA]
+- CREATE: "usuario registrou X atividade(s) do veiculo NOME (placa PLACA)..."
+- UPDATE: "usuario editou atividade do veiculo NOME (placa PLACA) de X para Y
+  atividade(s)..."
+- DELETE: "usuario excluiu X atividade(s) do veiculo NOME (placa PLACA)..."
+
+================================================================================
+CHANGELOG v2.2.0 - NOME/IDENTIFICACAO DO VEICULO + MEMORIA DE REGISTRO
+================================================================================
+
+[NOME/IDENTIFICACAO DO VEICULO]
+- VehicleDialog: campo QLineEdit "Nome / Identificacao" editavel entre Placa
+  e Categoria. Dialog aumentado para 520x560.
+- VehicleTableModel: header "Nome (Modelo)" renomeado para "Nome / Identificacao"
+- ReportService: header do PDF "Modelo" renomeado para "Nome / Identificacao",
+  largura da coluna ajustada
+- ActivityTableModel: ja exibe "placa - modelo" automaticamente (sem mudanca)
+- ActivityService (auditoria): inclui nome do veiculo junto com a placa em
+  todas as mensagens de log
+
+[MEMORIA PERSISTENTE EM REGISTRAR ATIVIDADE]
+- Ao salvar uma atividade, o sistema NAO limpa mais o veiculo selecionado nem
+  a data. Apenas quantidade volta para 1 e observacoes sao limpas.
+- Isso permite registrar multiplas atividades para o mesmo veiculo/data sem
+  precisar reselecionar a cada vez.
+- refresh_vehicles() em ActivityRegisterPage e HistoryPage preserva a
+  selecao atual ao recarregar a lista.
+
+[HISTORICO - COMBO VEICULO SOMENTE LEITURA]
+- cb_vehicle.setEditable(False) no HistoryPage. Nao e mais possivel digitar,
+  apenas selecionar um veiculo do dropdown.
+
+================================================================================
+SCHEMA DO BANCO DE DADOS
+================================================================================
+
+Tabela veiculos:
+  id INTEGER PK
+  placa VARCHAR(10) UNIQUE
+  modelo VARCHAR(80)  -- usado como "Nome / Identificacao"
+  marca VARCHAR(80)
+  ano INTEGER
+  categoria VARCHAR(20)
+  status VARCHAR(20)
+  observacoes TEXT
+  created_at DATETIME
+
+Tabela atividades:
+  id INTEGER PK
+  veiculo_id INTEGER FK -> veiculos.id
+  data_hora DATETIME
+  quantidade INTEGER
+  observacoes TEXT
+  created_at DATETIME
+
+Tabela admins:
+  id INTEGER PK
+  username VARCHAR(50) UNIQUE
+  password_hash VARCHAR(128)
+  nome_completo VARCHAR(100)
+  is_master INTEGER DEFAULT 0
+  is_active INTEGER DEFAULT 1
+  created_at DATETIME
+
+Tabela configuracoes:
+  id INTEGER PK
+  chave VARCHAR(50) UNIQUE
+  valor TEXT
+
+Tabela auditoria:
+  id INTEGER PK
+  usuario VARCHAR(100)
+  acao VARCHAR(20)
+  entidade VARCHAR(50)
+  entidade_id INTEGER
+  descricao TEXT
+  data_hora DATETIME DEFAULT now
+  data_retroativa DATETIME
+
+================================================================================
+REGRAS CRITICAS DE IMPLEMENTACAO
+================================================================================
+
+1. NUNCA retornar objetos ORM fora de session_scope. Sempre converter para dict.
+2. VehicleService e ActivityService ja retornam dicts em todos os metodos publicos.
+3. PySide6 usa Signal (nao pyqtSignal).
+4. VehicleDialog recebe dict (nao objeto ORM).
+5. Todos os services usam session_scope contextmanager.
+6. Tema dark padrao. Highlight da sidebar: vermelho MADEMAXI (#E53935).
+7. Sinais de sincronizacao: vehicle_changed e activity_changed.
+8. Relatorios PDF e e-mail devem constar "Gerado por: {username}".
+9. Categorias de veiculos sao customizaveis via CategoryService.
+10. Aba "Gestao" so aparece para is_master=True.
+11. NUNCA alterar arquivos existentes sem antes ler o conteudo via Get-Content.
+12. NUNCA criar arquivo main.py ou outro que ja exista sem verificar primeiro.
+
+================================================================================
+LOGIN E AUTENTICACAO
+================================================================================
+
+- Ao abrir o software, aparece tela de login (LoginDialog) com logo MADEMAXI.
+- Usuario e senha validados via AdminService.authenticate() (PBKDF2).
+- Atalho F1 na tela de login abre prompt de senha mestra.
+- Senha mestra correta abre AdminRegisterDialog para cadastro de administradores.
+- Checkbox "Administrador" (is_master): conta master pode gerenciar usuarios e categorias.
+- run.py: QApplication criado ANTES do LoginDialog.
+- MainWindow recebe admin_data, mostra aba "Gestao" apenas se is_master=True.
+- AdminEditDialog: edita nome_completo, username, nova senha, is_master, excluir.
+- Botao "Excluir Cadastro" vermelho com confirmacao. Soft delete (is_active=False).
+
+================================================================================
+O QUE JA FUNCIONA
+================================================================================
+
+- Cadastro completo de veiculos (CRUD) com Nome/Identificacao editavel
+- Registro de atividades vinculadas a veiculo com memoria persistente (veiculo
+  e data mantidos apos salvar)
+- Sincronizacao automatica de dropdowns via Signal vehicle_changed
+- Sincronizacao automatica Historico/Dashboard via Signal activity_changed
+- Dashboard com KPIs, cards com botao "i" explicativo e graficos de barra/linha
+- Historico paginado com filtros, ordenacao e combo veiculo somente leitura
+- Geracao de PDF profissional com identidade MADEMAXI
+- Envio de e-mail SMTP com corpo HTML profissional
+- Agendamento semanal automatico com catch-up
+- Tema dark e light com stylesheet global
+- Criptografia simples de senha SMTP
+- Login administrativo com tela de login
+- Cadastro de admin via F1 + senha mestra oculta
+- Contas administradoras (is_master) com permissao de gestao
+- Categorias de veiculos customizaveis (add/edit/delete) na pagina Gestao
+- Sistema de auditoria completo (CREATE/UPDATE/DELETE) com nome e placa
+- Botao "Auditoria" na aba Gestao mostrando todos os logs
+
+================================================================================
+O QUE AINDA FALTA / IDEIAS FUTURAS
+================================================================================
+
+- Exportar CSV do historico
+- Filtros avancados no historico
+- Notificacoes visuais no dashboard
+- Backup automatico do banco de dados
+- Dropdowns piscam ao abrir (problema conhecido no theme.py, nao resolvido)
+
+================================================================================
+AMBIENTE DE DESENVOLVIMENTO
+================================================================================
+
+cd C:\Dashboard_Frota_Dev
+.venv\Scripts\Activate.ps1
+python run.py
+
+BUILD DO INSTALADOR:
+C:\Dashboard_Frota_Dev\.venv\Scripts\python.exe C:\Dashboard_Frota_Dev\build_installer.py
+Saida: C:\Dashboard_Frota_Dev\dist_installer\Dashboard_Frotas_MADEMAXI_Setup_v1.0.0.exe
+
+MIGRACAO BANCO (categorias customizaveis):
+C:\Dashboard_Frota_Dev\.venv\Scripts\python.exe C:\Dashboard_Frota_Dev\migrate_categories.py
+
+================================================================================
+CONTEXTO DO USUARIO
+================================================================================
+
+- Brasil, valores em BRL
+- Prefere comandos PowerShell unicos e automatizados
+- Recebe arquivos completos (nunca snippets)
+- Prioriza eficiencia de memoria
+- Projeto em C:\Dashboard_Frota_Dev
+- README gerado via ipython no servidor (nao via PowerShell)
+- NUNCA alterar arquivos sem antes solicitar conteudo via Get-Content -Raw
+- NUNCA criar arquivo que ja exista sem verificar primeiro
+
+================================================================================
+DESENVOLVEDOR
+================================================================================
+
+Maicon do Amarilho Silveira
+GitHub: https://github.com/MaiconDAS
+
+================================================================================
+FIM DO BACKUP
+================================================================================

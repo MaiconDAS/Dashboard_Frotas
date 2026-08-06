@@ -10,6 +10,7 @@ from sqlalchemy import func, select, desc, asc
 from app.core.database import session_scope
 from app.models.activity import Activity
 from app.models.vehicle import Vehicle
+from app.services.audit_service import AuditService
 
 logger = logging.getLogger(__name__)
 
@@ -50,9 +51,12 @@ def _vehicle_to_dict(v: Vehicle) -> dict:
         "id": v.id,
         "placa": v.placa,
         "modelo": v.modelo,
+        "marca": v.marca,
+        "ano": v.ano,
         "categoria": v.categoria,
         "status": v.status,
         "observacoes": v.observacoes,
+        "created_at": v.created_at,
     }
 
 
@@ -64,9 +68,13 @@ class ActivityService:
         data_hora: datetime,
         quantidade: int,
         observacoes: str | None,
+        username: str | None = None,
     ) -> dict:
         if quantidade < 0:
             raise ValueError("Quantidade nao pode ser negativa.")
+
+        placa = "?"
+        nome = "?"
         with session_scope() as s:
             a = Activity(
                 veiculo_id=veiculo_id,
@@ -77,8 +85,32 @@ class ActivityService:
             s.add(a)
             s.flush()
             s.refresh(a)
+
+            v = s.get(Vehicle, veiculo_id)
+            if v:
+                placa = v.placa
+                nome = v.modelo or "?"
+
             logger.info("Atividade criada (id=%s)", a.id)
-            return _activity_to_dict(a)
+            result = _activity_to_dict(a)
+
+        if username:
+            agora = datetime.now()
+            desc = (
+                f"{username} registrou {quantidade} atividade(s) do veiculo {nome} (placa {placa}) "
+                f"no dia {agora.strftime('%d/%m/%Y')} as {agora.strftime('%H:%M')}h "
+                f"para o dia {data_hora.strftime('%d/%m/%Y')}"
+            )
+            AuditService.log(
+                username=username,
+                acao="CREATE",
+                entidade="activity",
+                entidade_id=result["id"],
+                descricao=desc,
+                data_retroativa=data_hora,
+            )
+
+        return result
 
     def update(
         self,
@@ -88,26 +120,86 @@ class ActivityService:
         data_hora: datetime,
         quantidade: int,
         observacoes: str | None,
+        username: str | None = None,
     ) -> None:
         if quantidade < 0:
             raise ValueError("Quantidade nao pode ser negativa.")
+
+        placa = "?"
+        nome = "?"
+        old_quantidade = None
         with session_scope() as s:
             a = s.get(Activity, activity_id)
             if not a:
                 raise ValueError("Atividade nao encontrada.")
+
+            old_quantidade = a.quantidade
+
             a.veiculo_id = veiculo_id
             a.data_hora = data_hora
             a.quantidade = quantidade
             a.observacoes = (observacoes or "").strip() or None
+
+            v = s.get(Vehicle, veiculo_id)
+            if v:
+                placa = v.placa
+                nome = v.modelo or "?"
+
             logger.info("Atividade atualizada (id=%s)", activity_id)
 
-    def delete(self, activity_id: int) -> None:
+        if username:
+            agora = datetime.now()
+            desc = (
+                f"{username} editou atividade do veiculo {nome} (placa {placa}) "
+                f"de {old_quantidade} para {quantidade} atividade(s) "
+                f"no dia {agora.strftime('%d/%m/%Y')} as {agora.strftime('%H:%M')}h "
+                f"(data retroativa: {data_hora.strftime('%d/%m/%Y')})"
+            )
+            AuditService.log(
+                username=username,
+                acao="UPDATE",
+                entidade="activity",
+                entidade_id=activity_id,
+                descricao=desc,
+                data_retroativa=data_hora,
+            )
+
+    def delete(self, activity_id: int, username: str | None = None) -> None:
+        placa = "?"
+        nome = "?"
+        data_hora = None
+        quantidade = None
+
         with session_scope() as s:
             a = s.get(Activity, activity_id)
             if not a:
                 return
+
+            v = s.get(Vehicle, a.veiculo_id)
+            if v:
+                placa = v.placa
+                nome = v.modelo or "?"
+            data_hora = a.data_hora
+            quantidade = a.quantidade
+
             s.delete(a)
             logger.info("Atividade removida (id=%s)", activity_id)
+
+        if username and data_hora and quantidade is not None:
+            agora = datetime.now()
+            desc = (
+                f"{username} excluiu {quantidade} atividade(s) do veiculo {nome} (placa {placa}) "
+                f"no dia {agora.strftime('%d/%m/%Y')} as {agora.strftime('%H:%M')}h "
+                f"(data retroativa: {data_hora.strftime('%d/%m/%Y')})"
+            )
+            AuditService.log(
+                username=username,
+                acao="DELETE",
+                entidade="activity",
+                entidade_id=activity_id,
+                descricao=desc,
+                data_retroativa=data_hora,
+            )
 
     def get(self, activity_id: int) -> Optional[dict]:
         with session_scope() as s:

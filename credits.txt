@@ -1,5 +1,5 @@
 ============================================================
-  DASHBOARD FROTAS - MADEMAXI
+  DASHBOARD FROTAS - MADEMAXI v2.2.0
 ============================================================
 
 Empresa: MADEMAXI - Materiais de Construcao e Ferragem

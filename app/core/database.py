@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 from contextlib import contextmanager
@@ -40,8 +40,9 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, futu
 
 
 def init_db() -> None:
-    # Importa modelos para registrar as tabelas no metadata
     from app.models.activity import Activity  # noqa: F401
+    from app.models.admin import Admin  # noqa: F401
+    from app.models.audit_log import AuditLog  # noqa: F401
     from app.models.setting import Setting  # noqa: F401
     from app.models.vehicle import Vehicle  # noqa: F401
 

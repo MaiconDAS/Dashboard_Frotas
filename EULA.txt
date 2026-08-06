@@ -1,0 +1,49 @@
+TERMO DE LICENCA DE USO DE SOFTWARE (EULA)
+Dashboard Frotas - MADEMAXI
+Versao 2.2.0
+
+IMPORTANTE: AO INSTALAR, COPIAR OU UTILIZAR ESTE SOFTWARE, VOCE ACEITA
+OS TERMOS E CONDICOES DESTE CONTRATO DE LICENCA. CASO NAO CONCORDE,
+NAO INSTALE NEM UTILIZE O SOFTWARE.
+
+1. PROPRIEDADE INTELECTUAL
+   Este software e propriedade exclusiva da MADEMAXI - Materiais de
+   Construcao e Ferragem e do seu desenvolvedor, Maicon do Amarilho
+   Silveira. Todos os direitos autorais, marcas e outros direitos de
+   propriedade intelectual pertencem exclusivamente aos seus titulares.
+
+2. LICENCA DE USO
+   E concedida ao usuario uma licenca nao exclusiva, intransferivel e
+   revogavel para utilizar este software estritamente para fins internos
+   da empresa MADEMAXI. Qualquer uso fora deste escopo e estritamente
+   proibido.
+
+3. RESTRICOES
+   a) E expressamente proibida a venda, aluguel, sublicenciamento ou
+      distribuicao comercial deste software, no todo ou em parte.
+   b) Nao e permitida a engenharia reversa, descompilacao ou
+      desmontagem do software.
+   c) A distribuicao nao e permitida sem autorizacao expressa e
+      por escrito de Maicon do Amarilho Silveira ou da MADEMAXI.
+   d) O download e a utilizacao sao permitidos exclusivamente via
+      GitHub (https://github.com/MaiconDAS/Dashboard_Frotas) para fins
+      de teste e avaliacao. A utilizacao em ambiente de producao sem
+      autorizacao e proibida.
+
+4. ISENCAO DE GARANTIA
+   Este software e fornecido "no estado em que se encontra", sem
+   garantias de qualquer tipo, expressas ou implicitas. O desenvolvedor
+   e a MADEMAXI nao se responsabilizam por quaisquer danos diretos,
+   indiretos, incidentais ou consequenciais resultantes do uso ou da
+   impossibilidade de uso deste software.
+
+5. SUPORTE
+   Para suporte tecnico, entre em contato atraves do GitHub ou e-mail
+   institucional da MADEMAXI.
+
+6. ATUALIZACOES
+   Este EULA se aplica a todas as atualizacoes, suplementos e
+   componentes adicionais do software, salvo disposicao em contrario.
+
+Copyright (C) 2026 MADEMAXI - Todos os direitos reservados.
+Desenvolvido por Maicon do Amarilho Silveira.

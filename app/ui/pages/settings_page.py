@@ -6,18 +6,8 @@ from typing import Callable
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
-    QCheckBox,
-    QFileDialog,
-    QFormLayout,
-    QHBoxLayout,
-    QLabel,
-    QLineEdit,
-    QMessageBox,
-    QPushButton,
-    QSpinBox,
-    QVBoxLayout,
-    QWidget,
-    QComboBox,
+    QCheckBox, QFileDialog, QFormLayout, QHBoxLayout, QLabel,
+    QLineEdit, QMessageBox, QPushButton, QSpinBox, QVBoxLayout, QWidget, QComboBox,
 )
 
 from app.core.config_store import AppConfig, ConfigStore
@@ -29,13 +19,8 @@ logger = logging.getLogger(__name__)
 
 class SettingsPage(QWidget):
     def __init__(
-        self,
-        *,
-        config_store: ConfigStore,
-        email_service: EmailService,
-        on_saved: Callable[[], None],
-        apply_theme: Callable[[str], None],
-        parent=None,
+        self, *, config_store: ConfigStore, email_service: EmailService,
+        on_saved: Callable[[], None], apply_theme: Callable[[str], None], parent=None,
     ) -> None:
         super().__init__(parent)
         self.config_store = config_store
@@ -44,11 +29,14 @@ class SettingsPage(QWidget):
         self.apply_theme_cb = apply_theme
 
         title = QLabel("Configuracoes")
-        title.setStyleSheet("font-size: 18px; font-weight: 600;")
+        title.setStyleSheet("font-size: 24px; font-weight: bold; color: #E53935;")
+
+        subtitle = QLabel("Configure as preferencias do sistema")
+        subtitle.setStyleSheet("font-size: 12px; color: #757575; margin-bottom: 8px;")
 
         self.ed_company = QLineEdit()
         self.ed_logo = QLineEdit()
-        btn_logo = QPushButton("...")
+        btn_logo = QPushButton("Buscar...")
         btn_logo.clicked.connect(self.pick_logo)
 
         self.cb_theme = QComboBox()
@@ -67,17 +55,32 @@ class SettingsPage(QWidget):
         self.ck_weekly = QCheckBox("Habilitar envio automatico semanal (segunda 08:00)")
 
         form = QFormLayout()
-        form.addRow("Empresa", self.ed_company)
+        form.setSpacing(14)
+        form.setContentsMargins(0, 0, 0, 0)
+
+        lbl_e = QLabel("Empresa")
+        lbl_e.setStyleSheet("font-weight: bold; font-size: 13px;")
+        lbl_l = QLabel("Logo (opcional)")
+        lbl_l.setStyleSheet("font-weight: bold; font-size: 13px;")
+        lbl_t = QLabel("Tema")
+        lbl_t.setStyleSheet("font-weight: bold; font-size: 13px;")
+
         logo_row = QHBoxLayout()
+        logo_row.setSpacing(8)
         logo_row.addWidget(self.ed_logo, 1)
         logo_row.addWidget(btn_logo)
-        form.addRow("Logo (opcional)", logo_row)
-        form.addRow("Tema", self.cb_theme)
+
+        form.addRow(lbl_e, self.ed_company)
+        form.addRow(lbl_l, logo_row)
+        form.addRow(lbl_t, self.cb_theme)
 
         form.addRow(QLabel(""))
-        form.addRow(QLabel("E-mail (SMTP)"))
+        smtp_title = QLabel("E-mail (SMTP)")
+        smtp_title.setStyleSheet("font-size: 16px; font-weight: bold; color: #E53935; margin-top: 8px;")
+        form.addRow(smtp_title)
 
         help_row = QHBoxLayout()
+        help_row.setSpacing(8)
         btn_tutorial = QPushButton("Tutorial")
         btn_tutorial.setToolTip("Como configurar o envio de e-mail")
         btn_tutorial.clicked.connect(self.show_smtp_tutorial)
@@ -91,11 +94,22 @@ class SettingsPage(QWidget):
         help_row.addStretch(1)
         form.addRow("", help_row)
 
-        form.addRow("Servidor SMTP*", self.ed_host)
-        form.addRow("Porta SMTP*", self.sp_port)
-        form.addRow("E-mail remetente*", self.ed_sender)
-        form.addRow("Senha / App Password*", self.ed_pass)
-        form.addRow("E-mail do gestor*", self.ed_manager)
+        lbl_h = QLabel("Servidor SMTP *")
+        lbl_h.setStyleSheet("font-weight: bold; font-size: 13px;")
+        lbl_p = QLabel("Porta SMTP *")
+        lbl_p.setStyleSheet("font-weight: bold; font-size: 13px;")
+        lbl_s = QLabel("E-mail remetente *")
+        lbl_s.setStyleSheet("font-weight: bold; font-size: 13px;")
+        lbl_pw = QLabel("Senha / App Password *")
+        lbl_pw.setStyleSheet("font-weight: bold; font-size: 13px;")
+        lbl_m = QLabel("E-mail do gestor *")
+        lbl_m.setStyleSheet("font-weight: bold; font-size: 13px;")
+
+        form.addRow(lbl_h, self.ed_host)
+        form.addRow(lbl_p, self.sp_port)
+        form.addRow(lbl_s, self.ed_sender)
+        form.addRow(lbl_pw, self.ed_pass)
+        form.addRow(lbl_m, self.ed_manager)
         form.addRow("", self.ck_tls)
         form.addRow("", self.ck_ssl)
         form.addRow("", self.ck_weekly)
@@ -108,12 +122,16 @@ class SettingsPage(QWidget):
         btn_save.clicked.connect(self.save)
 
         actions = QHBoxLayout()
+        actions.setSpacing(10)
         actions.addWidget(btn_test)
         actions.addStretch(1)
         actions.addWidget(btn_save)
 
         layout = QVBoxLayout()
+        layout.setSpacing(16)
+        layout.setContentsMargins(20, 16, 20, 16)
         layout.addWidget(title)
+        layout.addWidget(subtitle)
         layout.addLayout(form)
         layout.addLayout(actions)
         layout.addStretch(1)
@@ -155,26 +173,20 @@ class SettingsPage(QWidget):
 
     def setup_gmail(self) -> None:
         import webbrowser
-
-        # Abre a pagina de App Passwords do Google
         webbrowser.open("https://myaccount.google.com/apppasswords")
-
-        # Preenche automaticamente os campos do Gmail
         self.ed_host.setText("smtp.gmail.com")
         self.sp_port.setValue(587)
         self.ck_tls.setChecked(True)
         self.ck_ssl.setChecked(False)
-
         QMessageBox.information(
-            self,
-            "Configuracao Gmail",
+            self, "Configuracao Gmail",
             "A pagina de App Passwords do Google foi aberta no navegador.\n\n"
             "Campos preenchidos automaticamente:\n"
             "  Servidor: smtp.gmail.com\n"
             "  Porta: 587\n"
             "  TLS: Ativado\n\n"
             "Agora voce precisa:\n"
-            "1. Gerar uma App Password no Google (senha de 16 caracteres)\n"
+            "1. Gerar uma App Password no Google\n"
             "2. Preencher seu e-mail no campo 'E-mail remetente'\n"
             "3. Colar a App Password no campo 'Senha'\n"
             "4. Preencher o e-mail do gestor\n"

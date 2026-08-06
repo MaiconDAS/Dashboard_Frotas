@@ -73,7 +73,6 @@ def _fmt_dt(value) -> str:
 
 
 def _get_logo_path(config: AppConfig) -> Path | None:
-    """Retorna o caminho do logo: config primeiro, depois fallback padrao."""
     if config.logo_path:
         p = Path(config.logo_path)
         if p.exists():
@@ -92,6 +91,7 @@ class ReportService:
         config: AppConfig,
         summary: ReportSummary,
         rows: List[Tuple[dict, dict]],
+        generated_by: str = "",
     ) -> None:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -153,7 +153,6 @@ class ReportService:
 
         story = []
 
-        # === CABECALHO CENTRALIZADO COM LOGO ===
         logo_path = _get_logo_path(config)
         logo_cell = ""
         if logo_path:
@@ -189,14 +188,15 @@ class ReportService:
 
         story.append(HRFlowable(width="100%", thickness=2.5, color=colors.HexColor("#E53935"), spaceAfter=14))
 
+        gerado_por = f"Gerado por: {generated_by}  |  " if generated_by else ""
         story.append(Paragraph(
             f"<b>Periodo:</b> {summary.period_label} &nbsp;&nbsp;|&nbsp;&nbsp; "
+            f"{gerado_por}"
             f"<b>Gerado em:</b> {datetime.now().strftime('%d/%m/%Y %H:%M')}",
             subtitle_style,
         ))
         story.append(Spacer(1, 0.2 * cm))
 
-        # === RESUMO EM CARDS ===
         story.append(Paragraph("Resumo do Periodo", section_style))
 
         avg = round(summary.km_total / summary.vehicles_involved, 1) if summary.vehicles_involved > 0 else 0
@@ -229,11 +229,10 @@ class ReportService:
         story.append(resumo_table)
         story.append(Spacer(1, 0.5 * cm))
 
-        # === TABELA DETALHADA ===
         story.append(Paragraph("Atividades Detalhadas", section_style))
 
         data = [
-            ["Data/Hora", "Placa", "Modelo", "Categoria", "Qtd", "Observacoes"]
+            ["Data/Hora", "Placa", "Nome / Identificacao", "Categoria", "Qtd", "Observacoes"]
         ]
 
         for a, v in rows:
@@ -278,8 +277,11 @@ class ReportService:
 
         story.append(Spacer(1, 0.6 * cm))
         story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#d1d5db"), spaceAfter=6))
+
+        gerado_por_footer = f"Gerado por: {generated_by}  |  " if generated_by else ""
         story.append(Paragraph(
-            f"<font size=8 color=#9ca3af>Este relatorio foi gerado automaticamente pelo sistema MADEMAXI. "
+            f"<font size=8 color=#9ca3af>{gerado_por_footer}"
+            f"Este relatorio foi gerado automaticamente pelo sistema MADEMAXI. "
             f"Para duvidas, entre em contato com o departamento de logistica.</font>",
             small,
         ))

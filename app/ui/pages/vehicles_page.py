@@ -1,18 +1,11 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
-    QDialog,
-    QHBoxLayout,
-    QLabel,
-    QLineEdit,
-    QMessageBox,
-    QPushButton,
-    QTableView,
-    QVBoxLayout,
-    QWidget,
+    QDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox,
+    QPushButton, QTableView, QVBoxLayout, QWidget,
 )
 
 from app.services.vehicle_service import VehicleService
@@ -32,13 +25,16 @@ class VehiclesPage(QWidget):
         self.model = VehicleTableModel()
 
         title = QLabel("Veiculos")
-        title.setStyleSheet("font-size: 18px; font-weight: 600;")
+        title.setStyleSheet("font-size: 24px; font-weight: bold; color: #E53935;")
+
+        subtitle = QLabel("Gerencie a frota de veiculos da empresa")
+        subtitle.setStyleSheet("font-size: 12px; color: #757575; margin-bottom: 8px;")
 
         self.search = QLineEdit()
         self.search.setPlaceholderText("Buscar por placa ou nome...")
         self.search.textChanged.connect(self.refresh)
 
-        btn_add = QPushButton("Novo")
+        btn_add = QPushButton("Novo Veiculo")
         btn_add.setIcon(icon("add"))
         btn_add.clicked.connect(self.add_vehicle)
 
@@ -51,6 +47,7 @@ class VehiclesPage(QWidget):
         btn_del.clicked.connect(self.delete_vehicle)
 
         top = QHBoxLayout()
+        top.setSpacing(10)
         top.addWidget(title)
         top.addStretch(1)
         top.addWidget(self.search, 1)
@@ -67,7 +64,10 @@ class VehiclesPage(QWidget):
         self.table.horizontalHeader().setStretchLastSection(True)
 
         layout = QVBoxLayout()
+        layout.setSpacing(16)
+        layout.setContentsMargins(20, 16, 20, 16)
         layout.addLayout(top)
+        layout.addWidget(subtitle)
         layout.addWidget(self.table)
         self.setLayout(layout)
 

@@ -6,7 +6,7 @@ from PySide6.QtCore import QAbstractTableModel, QModelIndex, Qt
 
 
 class VehicleTableModel(QAbstractTableModel):
-    HEADERS = ["Placa", "Nome (Modelo)", "Categoria", "Observações"]
+    HEADERS = ["Placa", "Nome / Identificacao", "Categoria", "Observacoes"]
 
     def __init__(self) -> None:
         super().__init__()

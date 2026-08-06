@@ -35,6 +35,7 @@ class EmailService:
         body: str,
         attachment_path: Path,
         html_body: str | None = None,
+        generated_by: str = "",
     ) -> EmailResult:
         try:
             msg = EmailMessage()
@@ -59,7 +60,7 @@ class EmailService:
             server = self._connect(config)
             server.send_message(msg)
             server.quit()
-            logger.info("E-mail enviado para %s", config.manager_email)
+            logger.info("E-mail enviado para %s (gerado por: %s)", config.manager_email, generated_by or "N/A")
             return EmailResult(True, "E-mail enviado com sucesso.")
         except Exception as e:
             logger.exception("Falha ao enviar e-mail")
